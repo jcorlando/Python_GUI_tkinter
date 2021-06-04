@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 from tkinter import *
+from tkinter import filedialog
 
 window = Tk()                                       # Create root node
-window.title('Python file Checksum Hash Checker')
+window.title('File Checksum Hash Checker')
 
 # setting the minimum size of the root window
-window.minsize(540, 200)
+window.minsize(630, 200)
 
-window.geometry("600x350")    # Set intial height and width of window
+window.geometry("650x350")    # Set intial height and width of window
 
 #----------Add a menubar with exit command--------------
 menubar = Menu(window)
@@ -23,18 +24,26 @@ menubar.add_cascade(label="Help", menu=helpmenu)
 #----------Add a menubar with about command-----------------
 
 
-window.columnconfigure(0, weight=1)                                         # Configure Columns
-window.rowconfigure([0, 1], weight=1)                                       # Configure Rows
+window.columnconfigure(0, weight=1)                                         # Configure Column 0
 title = Label(window, text="Checksum Checker", fg="white", bg="black")      # Create the Title Label widget
 title.grid(row=0, column=0, sticky="new")                                   # "new" means "north", "east", "west"
 
 
+labelButton = Label(window, text="Choose a file to find its Checksum:")
+labelButton.grid(row=1, column=0, sticky="nw", padx=10)
 
-labelButton = Label(window, text="Choose a file to Checksum:")
-labelButton.grid(row=1, column=0, sticky="w", padx=15)
+#------------Define a Function to save the filepath--------------
+def filepathname():
+    window.filename = filedialog.askopenfilename(title="Choose a File")
+#------------Define a Function to save the filepath--------------
 
-button1 = Button(window, text ="Choose filepath")
-button1.grid(row=1, column=0, sticky="w", padx=200)
+button1 = Button(window, text ="Choose filepath", command=filepathname)
+button1.grid(row=1, column=0, sticky="nw", padx=250)
+
+
+window.rowconfigure(2, weight=1)                                            # Configure Row 2
+label_file_path = Label(window, text="The Path to your file is :")
+label_file_path.grid(row=2, column=0, sticky="nw", padx=10)
 
 
 
