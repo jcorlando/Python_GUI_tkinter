@@ -1,16 +1,13 @@
 #!/usr/bin/python3
 from tkinter import *
 from tkinter import filedialog
-
+import hashlib
 
 window = Tk()                                       # Create root node
 window.title('File Checksum Hash Checker')
 
 # setting the minimum size of the root window
-window.minsize(850, 290)
-
-# Set intial height and width of window
-window.geometry("850x290")
+window.minsize(865, 320)
 
 #----------Add a menubar with exit command--------------
 menubar = Menu(window)
@@ -39,22 +36,34 @@ filepath = StringVar()
 filepath.set("")
 md5_sum = StringVar()
 md5_sum.set("")
-md5_sum.set("Hello World!")
 sha1_sum = StringVar()
 sha1_sum.set("")
-sha1_sum.set("Hello World!")
 sha256_sum = StringVar()
 sha256_sum.set("")
-sha256_sum.set("Hello World!")
 def openFile():
     filepath.set(filedialog.askopenfilename(title="Choose a File"))
     label_path = Label(window, textvariable=filepath)
     label_path.grid(row=2, column=0, sticky="nw", padx=180)
     filepath_string = filepath.get()
+    md5_hash = hashlib.md5()
+    a_file = open(filepath_string, "rb")
+    content = a_file.read()
+    md5_hash.update(content)
+    md5_sum.set(md5_hash.hexdigest())
     label_md5_sum = Label(window, textvariable=md5_sum)
     label_md5_sum.grid(row=3, column=0, sticky="nw", pady=20, padx=180)
+
+
+    sha1_hash = hashlib.sha1()
+    sha1_hash.update(content)
+    sha1_sum.set(sha1_hash.hexdigest())
     label_sha1_sum = Label(window, textvariable=sha1_sum)
     label_sha1_sum.grid(row=4, column=0, sticky="nw", pady=20, padx=180)
+
+
+    sha256_hash = hashlib.sha256()
+    sha256_hash.update(content)
+    sha256_sum.set(sha256_hash.hexdigest())
     label_sha256_sum = Label(window, textvariable=sha256_sum)
     label_sha256_sum.grid(row=5, column=0, sticky="nw", pady=20, padx=180)
 #------------Define a Function For When Button is clicked and filepath is saved--------------
@@ -75,9 +84,13 @@ label_MD5_Sum = Label(window, text="The SHA1 Sum is :")
 label_MD5_Sum.grid(row=4, column=0, sticky="nw", pady=20, padx=10)
 
 
-window.rowconfigure(5, weight=1)                          # Configure Row 5
 label_MD5_Sum = Label(window, text="The SHA256 Sum is :")
 label_MD5_Sum.grid(row=5, column=0, sticky="nw", pady=20, padx=10)
+
+
+window.rowconfigure(6, weight=1)          # Configure Row 6
+entry_box = Entry(window, width=80)
+entry_box.grid(row=6, column=0, sticky="w")
 
 
 window.config(menu=menubar)
