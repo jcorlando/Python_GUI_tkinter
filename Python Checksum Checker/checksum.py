@@ -88,7 +88,6 @@ label_MD5_Sum = Label(window, text="The SHA256 Sum is :")
 label_MD5_Sum.grid(row=5, column=0, sticky="nw", pady=20, padx=10)
 
 
-window.rowconfigure(6, weight=1)          # Configure Row 6
 entry_box = Entry(window, width=80)
 entry_box.grid(row=6, column=0, sticky="w")
 
