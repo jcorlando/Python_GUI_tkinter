@@ -89,7 +89,7 @@ label_MD5_Sum.grid(row=5, column=0, sticky="nw", pady=20, padx=10)
 
 
 entry_box = Entry(window, width=80)
-entry_box.grid(row=6, column=0, sticky="w")
+entry_box.grid(row=6, column=0, padx=10, sticky="w")
 
 
 window.config(menu=menubar)
