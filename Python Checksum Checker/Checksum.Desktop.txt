@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Checksum
+Version=1.0
+Exec="/home/juan/Desktop/Python Checksum Checker/checksum.py"
+Terminal=false
+Type=Application
